@@ -1,0 +1,42 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default-deny catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function isValidSurveyResponse(data) {
+      return data.keys().hasAll(['q1', 'q2', 'q3', 'q4', 'q5', 'voterToken', 'createdAt']) &&
+             data.keys().size() == 7 &&
+             data.q1 is string && data.q1.size() <= 30 &&
+             data.q2 is string && data.q2.size() <= 30 &&
+             data.q3 is string && data.q3.size() <= 30 &&
+             data.q4 is string && data.q4.size() <= 30 &&
+             data.q5 is string && data.q5.size() <= 30 &&
+             data.voterToken is string && data.voterToken.size() <= 64 &&
+             data.createdAt is timestamp;
+    }
+
+    match /survey_responses/{responseId} {
+      // Public anonymous read of responses to aggregate live percentages
+      allow read: if true;
+
+      // Strict validation for creating an anonymous survey entry
+      allow create: if isValidId(responseId) &&
+                       isValidSurveyResponse(request.resource.data) &&
+                       request.resource.data.createdAt == request.time;
+
+      // Responses are immutable
+      allow update, delete: if false;
+    }
+
+    match /test/{docId} {
+      allow read: if true;
+    }
+  }
+}

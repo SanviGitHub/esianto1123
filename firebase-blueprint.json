@@ -1,0 +1,61 @@
+{
+  "entities": {
+    "SurveyResponse": {
+      "title": "SurveyResponse",
+      "description": "Anonymous survey submission from a student/participant",
+      "type": "object",
+      "properties": {
+        "q1": {
+          "type": "string",
+          "description": "Selected option ID for question 1",
+          "maxLength": 30
+        },
+        "q2": {
+          "type": "string",
+          "description": "Selected option ID for question 2",
+          "maxLength": 30
+        },
+        "q3": {
+          "type": "string",
+          "description": "Selected option ID for question 3",
+          "maxLength": 30
+        },
+        "q4": {
+          "type": "string",
+          "description": "Selected option ID for question 4",
+          "maxLength": 30
+        },
+        "q5": {
+          "type": "string",
+          "description": "Selected option ID for question 5",
+          "maxLength": 30
+        },
+        "voterToken": {
+          "type": "string",
+          "description": "Anonymous unique client token",
+          "maxLength": 64
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the response was submitted"
+        }
+      },
+      "required": [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5",
+        "voterToken",
+        "createdAt"
+      ]
+    }
+  },
+  "firestore": {
+    "/survey_responses/{responseId}": {
+      "schema": "SurveyResponse",
+      "description": "Stores real anonymous survey responses for calculating live percentages"
+    }
+  }
+}

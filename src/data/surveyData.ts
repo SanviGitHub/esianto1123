@@ -15,7 +15,7 @@ export interface SurveyQuestion {
   options: SurveyOption[];
 }
 
-export const INITIAL_PARTICIPANTS = 1248;
+export const INITIAL_PARTICIPANTS = 0;
 
 export const SURVEY_QUESTIONS: SurveyQuestion[] = [
   {
@@ -29,23 +29,23 @@ export const SURVEY_QUESTIONS: SurveyQuestion[] = [
       {
         id: "q1_opt1",
         text: "Es de débiles por no querer seguir luchando",
-        initialVotes: 224,
+        initialVotes: 0,
       },
       {
         id: "q1_opt2",
         text: "Es de valientes por tomar aquella decisión tan extrema",
-        initialVotes: 298,
+        initialVotes: 0,
       },
       {
         id: "q1_opt3",
         text: "Es de débiles por rendirse y a la vez de valientes por tomar la decisión",
         isKeyPedagogical: true,
-        initialVotes: 726,
+        initialVotes: 0,
       },
       {
         id: "q1_opt4",
         text: "Ni débiles ni valientes: es el síntoma de un dolor abrumador que requiere contención profesional urgente",
-        initialVotes: 512,
+        initialVotes: 0,
       },
     ],
   },
@@ -60,18 +60,18 @@ export const SURVEY_QUESTIONS: SurveyQuestion[] = [
       {
         id: "q2_opt1",
         text: "Sí, solo con fuerza de voluntad y proponiéndose estar bien se puede salir",
-        initialVotes: 148,
+        initialVotes: 0,
       },
       {
         id: "q2_opt2",
         text: "En la depresión se NECESITA una compañía y ayuda profesional especializada",
         isKeyPedagogical: true,
-        initialVotes: 1098,
+        initialVotes: 0,
       },
       {
         id: "q2_opt3",
         text: "Depende de cada quien, el paso del tiempo suele resolverlo sin necesidad de médicos",
-        initialVotes: 94,
+        initialVotes: 0,
       },
     ],
   },
@@ -86,18 +86,18 @@ export const SURVEY_QUESTIONS: SurveyQuestion[] = [
       {
         id: "q3_opt1",
         text: "Sí, tienen un problema moral o están mal de la cabeza",
-        initialVotes: 112,
+        initialVotes: 0,
       },
       {
         id: "q3_opt2",
         text: "Es una reacción hormonal en respuesta de endorfinas y el estado de alerta del cuerpo ante el dolor",
         isKeyPedagogical: true,
-        initialVotes: 898,
+        initialVotes: 0,
       },
       {
         id: "q3_opt3",
         text: "Es una respuesta fisiológica natural, pero si genera autolesión requiere atención clínica urgente",
-        initialVotes: 642,
+        initialVotes: 0,
       },
     ],
   },
@@ -112,18 +112,18 @@ export const SURVEY_QUESTIONS: SurveyQuestion[] = [
       {
         id: "q4_opt1",
         text: "Sí, porque responde al instante, no juzga y da buenos consejos siempre",
-        initialVotes: 86,
+        initialVotes: 0,
       },
       {
         id: "q4_opt2",
         text: "ChatGPT solo te dirá lo que quieres escuchar; buscar ayuda de una persona real es mejor que hablar con una IA",
         isKeyPedagogical: true,
-        initialVotes: 1185,
+        initialVotes: 0,
       },
       {
         id: "q4_opt3",
         text: "Puede servir para desahogo temporal o redactar ideas, pero jamás como terapia profesional",
-        initialVotes: 420,
+        initialVotes: 0,
       },
     ],
   },
@@ -138,18 +138,18 @@ export const SURVEY_QUESTIONS: SurveyQuestion[] = [
       {
         id: "q5_opt1",
         text: "Totalmente de acuerdo, en la adolescencia casi todo pasa y es mejor no exagerar ni quejarse",
-        initialVotes: 124,
+        initialVotes: 0,
       },
       {
         id: "q5_opt2",
         text: "Ante cualquier problema se habla; no hay que minimizar emociones que te hacen mal",
         isKeyPedagogical: true,
-        initialVotes: 1123,
+        initialVotes: 0,
       },
       {
         id: "q5_opt3",
         text: "Solo vale la pena hablar si es un problema extremo o que involucra peligro inmediato",
-        initialVotes: 165,
+        initialVotes: 0,
       },
     ],
   },
