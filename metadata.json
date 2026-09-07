@@ -1,6 +1,6 @@
 {
   "name": "Encuesta ESI: Salud Mental",
-  "description": "Encuesta anónima interactiva para proyecto de ESI sobre salud mental y la importancia de buscar ayuda profesional con estadísticas en tiempo real.",
+  "description": "Espacio seguro, serio y esperanzador de concientización y prevención del suicidio y lesiones, con encuesta anónima y estadísticas reales en amarillo, blanco y gris oscuro.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
