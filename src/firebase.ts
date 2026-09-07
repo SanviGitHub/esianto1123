@@ -1,10 +1,19 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
-import { getFirestore, doc, getDocFromServer } from 'firebase/firestore';
+import { getFirestore, initializeFirestore, doc, getDocFromServer } from 'firebase/firestore';
 import firebaseConfig from '../firebase-applet-config.json';
 
 // Initialize Firebase App
 const app = initializeApp(firebaseConfig);
+
+// Configure Firestore with auto-detect long-polling to prevent iframe/proxy connection dropouts
+try {
+  initializeFirestore(app, {
+    experimentalAutoDetectLongPolling: true,
+  }, firebaseConfig.firestoreDatabaseId);
+} catch {
+  // Instance already initialized
+}
 
 // CRITICAL: Must pass firebaseConfig.firestoreDatabaseId
 export const db = getFirestore(app, firebaseConfig.firestoreDatabaseId);
@@ -54,7 +63,16 @@ export function handleFirestoreError(error: unknown, operationType: OperationTyp
     path
   };
   console.error('Firestore Error: ', JSON.stringify(errInfo));
-  throw new Error(JSON.stringify(errInfo));
+
+  const errorMsg = errInfo.error.toLowerCase();
+  const isPermissionError = 
+    errorMsg.includes('permission') || 
+    errorMsg.includes('insufficient') ||
+    errorMsg.includes('permission-denied');
+
+  if (isPermissionError) {
+    throw new Error(JSON.stringify(errInfo));
+  }
 }
 
 // Connection test on boot
@@ -63,8 +81,13 @@ export async function testConnection(): Promise<boolean> {
     await getDocFromServer(doc(db, 'test', 'connection'));
     return true;
   } catch (error) {
-    if (error instanceof Error && error.message.includes('the client is offline')) {
-      console.warn('Firebase client is offline or connecting...');
+    if (
+      error instanceof Error && 
+      (error.message.includes('the client is offline') || 
+       error.message.includes('unavailable') || 
+       (error as { code?: string }).code === 'unavailable')
+    ) {
+      console.warn('Firebase client is connecting or operating in offline mode.');
     }
     return false;
   }

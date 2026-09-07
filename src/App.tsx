@@ -42,7 +42,6 @@ import {
   HealingPathLine, 
   SupportNetworkDots 
 } from './components/VisualMetaphors.tsx';
-import { SanvyIntro } from './components/SanvyIntro.tsx';
 
 const STORAGE_KEY_USER_ANSWERS = 'esi_mental_health_user_answers_v4';
 
@@ -60,9 +59,6 @@ function getOrCreateVoterToken(): string {
 }
 
 export default function App() {
-  // Intro splash screen state (loads first before the web)
-  const [showIntro, setShowIntro] = useState<boolean>(true);
-
   // Real-time vote counts from Firestore
   const [votes, setVotes] = useState<Record<string, number>>(() => {
     const initial: Record<string, number> = {};
@@ -255,13 +251,7 @@ export default function App() {
   };
 
   return (
-    <>
-      {/* Sanvy Corporation Intro Screen (Loads first before the web) */}
-      {showIntro && (
-        <SanvyIntro onComplete={() => setShowIntro(false)} />
-      )}
-
-      <div id="main-survey-container" className="bg-hope-pattern min-h-screen flex flex-col text-gray-800 selection:bg-amber-300 selection:text-gray-900">
+    <div id="main-survey-container" className="bg-hope-pattern min-h-screen flex flex-col text-gray-800 selection:bg-amber-300 selection:text-gray-900">
         
         {/* Toast Notification */}
         {toastMessage && (
@@ -293,14 +283,6 @@ export default function App() {
                 <Lock className="w-3.5 h-3.5 text-emerald-600" />
                 100% Anónimo
               </span>
-              <button
-                onClick={() => setShowIntro(true)}
-                className="px-3 py-1 rounded-full bg-white hover:bg-amber-50 text-gray-700 text-xs font-medium border border-gray-200 shadow-sm flex items-center gap-1.5 transition-all cursor-pointer"
-                title="Volver a ver la presentación de Sanvy Corporation"
-              >
-                <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-                Sanvy Corporation
-              </button>
             </div>
 
             {/* Minimalist Rising Sun Symbol */}
@@ -816,13 +798,7 @@ export default function App() {
                 <span className="w-2.5 h-2.5 rounded-full bg-amber-400 animate-pulse" />
                 <span>Septiembre Amarillo y todo el año • Proyecto ESI</span>
                 <span className="hidden sm:inline text-gray-600">|</span>
-                <button
-                  onClick={() => setShowIntro(true)}
-                  className="hover:text-amber-300 transition-colors cursor-pointer text-gray-400 underline decoration-dotted"
-                  title="Ver intro institucional"
-                >
-                  Sanvy Corporation (2.° 4.ª)
-                </button>
+                <span className="text-gray-400">Sanvy Corporation (2.° 4.ª)</span>
               </div>
 
               <div className="flex items-center gap-3">
@@ -921,6 +897,5 @@ export default function App() {
         )}
 
       </div>
-    </>
   );
 }
